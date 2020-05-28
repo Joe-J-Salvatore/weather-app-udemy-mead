@@ -1,0 +1,58 @@
+body {
+  background-color: tan;
+  color: black;
+  font-family: sans-serif;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+.content form input {
+  border: 1px solid lightgray;
+  padding: 4px;
+}
+
+button {
+  cursor: pointer;
+  background: black;
+  color: white;
+  border: 1px solid black;
+  padding: 4px;
+}
+
+.nav a {
+  text-decoration: none;
+  text-align: center;
+  color: white;
+}
+
+.nav button {
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #888888;
+  background: #888888;
+  color: white;
+  padding: 8px;
+}
+
+h1 {
+  color: white;
+  font-size: 4em;
+}
+
+.content img {
+  width: 75%;
+  border: 1px solid white;
+}
+
+footer p {
+  color: lightyellow;
+}
