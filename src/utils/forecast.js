@@ -1,9 +1,10 @@
 // dependencies
 const request = require('postman-request');
+require('dotenv').config();
 
 
 const forecast = (latitude, longitude, callback) => {
-  const url = `http://api.weatherstack.com/current?access_key=94993ce123aaebb64b588768421eeb4e&query=${latitude},${longitude}&units=f`;
+  const url = `http://api.weatherstack.com/current?access_key=${process.env.WRS_ACCESS_KEY}&query=${latitude},${longitude}&units=f`;
   request({url:url, json:true}, (error, res, body) => {
     if (error) {
       callback('Error: Something went wrong', undefined);

@@ -21,6 +21,7 @@ weatherForm.addEventListener('submit', (e) => {
   loc.textContent = '';
   forecast.textContent = '';
   photo.textContent = '';
+  caption.textContent = '';
   para.textContent = 'Loading...';
 
 
@@ -45,9 +46,7 @@ weatherForm.addEventListener('submit', (e) => {
         imgEl.setAttribute('src', data.src);
         photo.appendChild(imgEl);
         caption.innerHTML = 'Enjoy a random photo from your location. (Courtesy of Unsplash)';
-
-      }
-    });
-  });
-
-});
+      } // end else
+    }); // end 2nd .then() call
+  }); // end 1st .then() call
+}); // end addEventListener

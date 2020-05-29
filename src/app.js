@@ -4,10 +4,11 @@ const request = require('postman-request');
 const express = require('express');
 const app = express();
 const hbs = require('hbs');
+//require('dotenv').config();
 const forecast = require('./utils/forecast');
 const geocode = require('./utils/geocode');
 const unsplash = require('./utils/unsplash');
-
+// port for hosting and local environments
 const port = process.env.PORT || 3000;
 
 // view engine
