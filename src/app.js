@@ -6,6 +6,8 @@ const app = express();
 const hbs = require('hbs');
 const forecast = require('./utils/forecast');
 const geocode = require('./utils/geocode');
+const unsplash = require('./utils/unsplash');
+
 const port = process.env.PORT || 3000;
 
 // view engine
@@ -41,18 +43,24 @@ app.get('/weather', (req, res) => {
         return res.send({error});
       }
 
-      forecast(latitude, longitude, (error, {current_temp, conditions, icon}) => {
+      forecast(latitude, longitude, (error, {current_temp, conditions}) => {
         if (error) {
           return res.send({error});
         }
-        //console.log(location);
-        //console.log(forecastData);
-        res.send({
-          location,
-          forecast: current_temp,
-          conditions,
-          icon
-        });
+
+        unsplash(location, (error, {src}) => {
+          if (error) {
+            return res.send({error});
+          }
+
+          res.send({
+            location,
+            forecast: current_temp,
+            conditions,
+            src
+          });
+
+        }); // end unsplash
       }); // end forecast
     }); // end geocode
   } // end else

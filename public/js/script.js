@@ -1,26 +1,28 @@
 // fetch weather forecast
 const url = '/weather?address=';
-// unsplash photo API
-const access_key = 'cPlfRcFWfrcEgMSxtxDGX-AcTtwvp5HFhfSMjG_n6Dw';
-const secret_key = 'ij3ulntj_w9hZm65bZooFMs1Thigd-KVUh5Gi8UrDjA';
+
 // get search form
 const weatherForm = document.querySelector('.weather-search');
 const search = document.querySelector('input');
+
 // html to display data
 const loc = document.getElementById('city');
 const forecast = document.getElementById('forecast');
 const para = document.getElementById('conditions');
 const photo = document.getElementById('photo');
+const caption = document.getElementById('photo-caption');
 
 // access user input to get weather data from browser
 weatherForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const location = search.value;
 
+  // clear the browser display
   loc.textContent = '';
   forecast.textContent = '';
-  para.textContent = 'Loading...';
   photo.textContent = '';
+  para.textContent = 'Loading...';
+
 
   fetch(url+location).then(response => {
     response.json().then(data => {
@@ -31,25 +33,20 @@ weatherForm.addEventListener('submit', (e) => {
         const city = data.location;
         const citySubStr = city.substring(0, city.lastIndexOf(','));
         loc.innerHTML = citySubStr;
-        // icon start
-        // const icon = document.createElement("IMG");
-        // icon.setAttribute('src', data.icon);
-        // iconDiv.appendChild(icon);
+
         // forecast
         forecast.innerHTML = data.forecast;
         para.innerHTML = data.conditions;
 
-      }
-    });
-  });
-  // access unsplash photo API
-  const unsplashUrl = `https://api.unsplash.com/search/photos?query=${location} skyline&orientation=landscape&page=1&client_id=${access_key}`;
+        // unsplash photo
+        // create IMG element
+        const imgEl = document.createElement('IMG');
+        // set IMG src attribute
+        imgEl.setAttribute('src', data.src);
+        photo.appendChild(imgEl);
+        caption.innerHTML = 'Enjoy a random photo from your location. (Courtesy of Unsplash)';
 
-  fetch(unsplashUrl).then(response => {
-    response.json().then(data => {
-      const pic = document.createElement('IMG');
-      pic.setAttribute('src', data.results[0].urls.regular);
-      photo.appendChild(pic);
+      }
     });
   });
 
